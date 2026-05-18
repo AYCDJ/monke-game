@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvmamkimwt52s"]
+
+[ext_resource type="Script" uid="uid://ciirgoicga0gg" path="res://banan.gd" id="1_d41el"]
+[ext_resource type="Texture2D" uid="uid://b7m87oiix1544" path="res://art/BananaCollectable.png" id="1_j2txv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d41el"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j2txv")
+}],
+"loop": true,
+"name": &"banan",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8onal"]
+
+[node name="Banan" type="Area2D"]
+scale = Vector2(2.3, 2.3)
+script = ExtResource("1_d41el")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d41el")
+animation = &"banan"
+
+[node name="BananShape2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+shape = SubResource("CircleShape2D_8onal")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="collected" from="." to="." method="_on_banana_collected"]
