@@ -26,3 +26,6 @@ func _on_start_button_pressed():
 
 func _on_message_timer_timeout():
 	$Message.hide()
+
+func update_banana_score(banana_score):
+	$BananaLabel.text = "Bananas: " + str(banana_score)

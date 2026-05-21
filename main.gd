@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 var score
+var banana_score = 0
 @export var banan_scene: PackedScene 
 var banana: Area2D
 
@@ -14,6 +15,8 @@ func game_over():
 
 func new_game():
 	score = 0
+	banana_score = 0
+	$HUD.update_banana_score(banana_score)
 	$Music.play()
 	$Player.start($StartPostition.position)
 	$StartTimer.start()
@@ -58,15 +61,15 @@ func spawn_banan():
 	
 	banana = banan_scene.instantiate()
 	
-	var spawn_points = $BananSpawnArea.get_children()
-	var spawn = spawn_points.pick_random()
 	
-	banana.position = spawn.global_position
 	banana.collected.connect(_on_banana_collected)
 	
 	add_child(banana)
 
 func _on_banana_collected():
+	banana_score += 1
+	print("collected banan: ", banana_score)
+	$HUD.update_banana_score(banana_score)
 	$BananTimer.start()
 
 func _on_banan_timer_timeout():

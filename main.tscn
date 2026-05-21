@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cwtkk350jqrdm"]
+[gd_scene format=4 uid="uid://cwtkk350jqrdm"]
 
 [ext_resource type="Script" uid="uid://cpktnaeqgh8hp" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://cyoo10cc3lc6o" path="res://mob.tscn" id="2_1bvp3"]
@@ -30,12 +30,12 @@ tags = {
 }
 loop = true
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1654242203]
 script = ExtResource("1_h2yge")
 mob_scene = ExtResource("2_1bvp3")
 banan_scene = ExtResource("3_7mycd")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1064716808]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -43,54 +43,36 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.64705884, 0, 1)
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("3_lquwl")]
+[node name="Player" parent="." unique_id=1417523070 instance=ExtResource("3_lquwl")]
 
-[node name="MobTimer" type="Timer" parent="."]
+[node name="MobTimer" type="Timer" parent="." unique_id=1645021609]
 wait_time = 0.5
 
-[node name="ScoreTimer" type="Timer" parent="."]
+[node name="ScoreTimer" type="Timer" parent="." unique_id=1487919703]
 
-[node name="StartTimer" type="Timer" parent="."]
+[node name="StartTimer" type="Timer" parent="." unique_id=1594714345]
 wait_time = 2.0
 one_shot = true
 
-[node name="BananTimer" type="Timer" parent="."]
+[node name="BananTimer" type="Timer" parent="." unique_id=1958433522]
 wait_time = 0.75
 one_shot = true
 
-[node name="StartPostition" type="Marker2D" parent="."]
+[node name="StartPostition" type="Marker2D" parent="." unique_id=1673088205]
 position = Vector2(320, 240)
 
-[node name="MobPath" type="Path2D" parent="."]
+[node name="MobPath" type="Path2D" parent="." unique_id=474290792]
 curve = SubResource("Curve2D_7mycd")
 
-[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" unique_id=1543389963]
 
-[node name="BananSpawnArea" type="Node2D" parent="."]
-position = Vector2(228, 198)
+[node name="HUD" parent="." unique_id=178156266 instance=ExtResource("4_1bvp3")]
 
-[node name="testbanan" type="Marker2D" parent="BananSpawnArea"]
-position = Vector2(208, -127)
-scale = Vector2(3, 3)
-gizmo_extents = 70.5
-
-[node name="testbanan2" type="Marker2D" parent="BananSpawnArea"]
-position = Vector2(-107, -70)
-scale = Vector2(3, 3)
-gizmo_extents = 70.5
-
-[node name="testbanan3" type="Marker2D" parent="BananSpawnArea"]
-position = Vector2(136, 191)
-scale = Vector2(3, 3)
-gizmo_extents = 70.5
-
-[node name="HUD" parent="." instance=ExtResource("4_1bvp3")]
-
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=343658110]
 stream = SubResource("AudioStreamOggVorbis_lquwl")
 parameters/looping = true
 
-[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+[node name="GameOver" type="AudioStreamPlayer2D" parent="." unique_id=800332217]
 stream = ExtResource("6_272bh")
 
 [connection signal="hit" from="Player" to="." method="game_over"]
