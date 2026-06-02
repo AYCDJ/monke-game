@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bxb2ui2innr8y"]
+
+[ext_resource type="Script" uid="uid://c5w5d6nfta66i" path="res://cool_monkey.gd" id="1_qu2cb"]
+[ext_resource type="Texture2D" uid="uid://b3wi1qmjeorh4" path="res://CoolMonkey.png" id="2_ym1i3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_al6jm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ym1i3")
+}],
+"loop": true,
+"name": &"Monkey",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pbmyk"]
+radius = 9.0
+height = 20.0
+
+[node name="CoolMonkey" type="Area2D" unique_id=1438460520]
+script = ExtResource("1_qu2cb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1031981357]
+sprite_frames = SubResource("SpriteFrames_al6jm")
+animation = &"Monkey"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=337947230]
+shape = SubResource("CapsuleShape2D_pbmyk")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

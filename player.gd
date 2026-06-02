@@ -4,6 +4,12 @@ signal hit
 
 @export var speed = 400
 var screen_size
+var max_health := 3
+var health := max_health
+
+func set_difficulty_health():
+	max_health = Settings.get_player_health()
+	health = max_health
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -38,11 +44,15 @@ func _process(delta):
 
 
 func _on_body_entered(_body):
-	hide()
-	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
+	health -= 1
+	print("health: ", health)
+	if health <= 0:
+		hide()
+		hit.emit()
+		$CollisionShape2D.set_deferred("disabled", true)
 
 func start(pos):
 	position = pos
+	set_difficulty_health()
 	show()
 	$CollisionShape2D.disabled = false
