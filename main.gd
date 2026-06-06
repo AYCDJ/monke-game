@@ -6,8 +6,6 @@ var banana_score = 0
 @export var banan_scene: PackedScene 
 var banana: Area2D
 var game_time := 0.0
-var monkey_spawner_times = [5.0, 15.0, 30.0]
-var monkey_index = 0
 @export var cool_monkey_scene: PackedScene
 var cool_monkey: Area2D
 
@@ -19,10 +17,9 @@ func game_over():
 	$GameOver.play()
 
 func new_game():
-	score = 0
+	score = 0 
 	banana_score = 0
 	game_time = 0.0
-	monkey_index = 0
 	$HUD.update_banana_score(banana_score)
 	$Music.play()
 	Settings.difficulty = "easy" # remove/change this eventually - forces easy 
@@ -56,10 +53,10 @@ func _on_score_timer_timeout() -> void:
 	score += 1
 	$HUD.update_score(score)
 	
-	if monkey_index < monkey_spawner_times.size():
-		if score >= monkey_spawner_times[monkey_index]:
-			spawn_cool_monkey()
-			monkey_index += 1
+	var cycle_time = score % 60
+	
+	if cycle_time == 5 or cycle_time == 15 or cycle_time == 30:
+		spawn_cool_monkey()
 
 func _on_start_timer_timeout():
 	$MobTimer.start()
@@ -87,9 +84,11 @@ func _on_banan_timer_timeout():
 	spawn_banan()
 
 func spawn_cool_monkey():
-	if cool_monkey:
+	if is_instance_valid(cool_monkey):
 		cool_monkey.queue_free()
 	
 	cool_monkey = cool_monkey_scene.instantiate()
 	
 	add_child(cool_monkey)
+	
+	cool_monkey.respawn()
